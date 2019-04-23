@@ -1,6 +1,6 @@
 <?php
 
-namespace Mock\Api\Controller;
+namespace Mock\Api\Http\Controller;
 
 use Mock\Api\Model;
 
