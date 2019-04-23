@@ -1,3 +1,4 @@
+-- Mock data provided by https://mockaroo.com/
 CREATE TABLE users (
 	id INT,
 	username VARCHAR(50),

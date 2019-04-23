@@ -19,15 +19,14 @@ class IndexController extends AbstractController
         $page      = (null !== $this->request->getQuery('page')) ? (int)$this->request->getQuery('page') : null;
         $sort      = (null !== $this->request->getQuery('sort')) ? $this->request->getQuery('sort') : null;
         $filter    = (null !== $this->request->getQuery('filter')) ? $this->request->getQuery('filter') : null;
-        $limit     = (null !== $this->request->getQuery('limit')) ?
-            (int)$this->request->getQuery('limit') : $this->application->config['pagination'];
+        $limit     = (null !== $this->request->getQuery('limit')) ? (int)$this->request->getQuery('limit') : null;
 
         $results = [
             'results'      => $userModel->getAll($page, $limit, $sort, $filter, $fields),
             'result_count' => $userModel->getCount($filter)
         ];
 
-        $this->send(200, $results, 'OK', $this->application->config['http_options_headers']);
+        $this->send($results);
     }
 
     /**
@@ -39,9 +38,7 @@ class IndexController extends AbstractController
     {
         $userModel = new Model\User();
         $filter    = (null !== $this->request->getQuery('filter')) ? $this->request->getQuery('filter') : null;
-        $this->send(
-            200, ['result_count' => $userModel->getCount($filter)], 'OK', $this->application->config['http_options_headers']
-        );
+        $this->send(['result_count' => $userModel->getCount($filter)]);
     }
 
     /**
@@ -51,7 +48,7 @@ class IndexController extends AbstractController
      */
     public function error()
     {
-        $this->send(404, ['error' => 'Resource not found.']);
+        $this->send(['error' => 'Resource not found.'], 404);
     }
 
 }

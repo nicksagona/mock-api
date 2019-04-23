@@ -74,24 +74,26 @@ abstract class AbstractController extends \Pop\Controller\AbstractController
     /**
      * Send method
      *
-     * @param  int    $code
      * @param  string $body
+     * @param  int    $code
      * @param  string $message
      * @param  array  $headers
      * @return void
      */
-    public function send($code = 200, $body = null, $message = null, array $headers = null)
+    public function send($body = null, $code = 200, $message = null, array $headers = null)
     {
         if (null !== $message) {
             $this->response->setMessage($message);
         }
 
         if (null !== $headers) {
-            $this->response->setHeaders($headers);
+            $headers = array_merge($this->application->config['http_options_headers'], $headers);
+        } else {
+            $headers = $this->application->config['http_options_headers'];
         }
+        $this->response->setHeaders($headers);
 
-        $responseBody = (!empty($body) && ($this->response->getHeader('Content-Type') == 'application/json')) ?
-            json_encode($body, JSON_PRETTY_PRINT) : $body;
+        $responseBody = (!empty($body)) ? json_encode($body, JSON_PRETTY_PRINT) : $body;
 
         $this->response->setCode($code);
         $this->response->setBody($responseBody . PHP_EOL . PHP_EOL);
@@ -108,7 +110,7 @@ abstract class AbstractController extends \Pop\Controller\AbstractController
      */
     public function sendOptions($code = 200, $message = null, array $headers = null)
     {
-        $this->send($code, '', $message, $headers);
+        $this->send('', $code, $message, $headers);
     }
 
 }

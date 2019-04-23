@@ -4,15 +4,15 @@ return [
     'database' => include __DIR__ . '/database.php',
     'routes'   => [
         '/users[/]' => [
-            'controller' => 'Scroll\Http\Controller\IndexController',
+            'controller' => 'Mock\Api\Http\Controller\IndexController',
             'action'     => 'users'
         ],
         '/users/count[/]' => [
-            'controller' => 'Scroll\Http\Controller\IndexController',
+            'controller' => 'Mock\Api\Http\Controller\IndexController',
             'action'     => 'usersCount'
         ],
         '*'    => [
-            'controller' => 'Scroll\Http\Controller\IndexController',
+            'controller' => 'Mock\Api\Http\Controller\IndexController',
             'action'     => 'error'
         ]
     ],
