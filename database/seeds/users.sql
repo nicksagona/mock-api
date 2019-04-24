@@ -1,10 +1,11 @@
 -- Mock data provided by https://mockaroo.com/
 CREATE TABLE users (
-	id INT,
-	username VARCHAR(50),
-	first_name VARCHAR(50),
-	last_name VARCHAR(50),
-	email VARCHAR(50)
+	id INT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(255),
+	first_name VARCHAR(255),
+	last_name VARCHAR(255),
+	email VARCHAR(255),
+	PRIMARY KEY (id)
 );
 INSERT INTO users (id, username, first_name, last_name, email) VALUES (1, 'wdyble0', 'Winny', 'Dyble', 'wdyble0@bing.com');
 INSERT INTO users (id, username, first_name, last_name, email) VALUES (2, 'abrazel1', 'Andris', 'Brazel', 'abrazel1@utexas.edu');

@@ -3,17 +3,39 @@
 return [
     'database' => include __DIR__ . '/database.php',
     'routes'   => [
-        '/users[/]' => [
-            'controller' => 'Mock\Api\Http\Controller\IndexController',
-            'action'     => 'users'
+        'options,get' => [
+            '/users[/:id]' => [
+                'controller' => 'Mock\Api\Http\Controller\IndexController',
+                'action'     => 'index'
+            ],
+            '/users/count[/]' => [
+                'controller' => 'Mock\Api\Http\Controller\IndexController',
+                'action'     => 'count'
+            ]
         ],
-        '/users/count[/]' => [
-            'controller' => 'Mock\Api\Http\Controller\IndexController',
-            'action'     => 'usersCount'
+        'options,post' => [
+            '/users[/]' => [
+                'controller' => 'Mock\Api\Http\Controller\IndexController',
+                'action'     => 'create'
+            ]
         ],
-        '*'    => [
-            'controller' => 'Mock\Api\Http\Controller\IndexController',
-            'action'     => 'error'
+        'options,put' => [
+            '/users/:id' => [
+                'controller' => 'Mock\Api\Http\Controller\IndexController',
+                'action'     => 'update'
+            ]
+        ],
+        'options,delete' => [
+            '/users[/:id]' => [
+                'controller' => 'Mock\Api\Http\Controller\IndexController',
+                'action'     => 'delete'
+            ]
+        ],
+        '*' => [
+            '*' => [
+                'controller' => 'Mock\Api\Http\Controller\IndexController',
+                'action'     => 'error'
+            ]
         ]
     ],
     'http_options_headers' => [

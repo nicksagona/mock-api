@@ -1,9 +1,8 @@
 {
     "require": {
         "php": ">=7.1.0",
-        "popphp/popphp": "^3.3.0",
+        "popphp/popcorn": "^3.2.0",
         "popphp/pop-db": "^4.5.2",
-        "popphp/pop-http": "^3.2.0",
         "popphp/pop-kettle": "^1.0.0"
     },
     "autoload": {

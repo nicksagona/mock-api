@@ -66,6 +66,58 @@ class User extends AbstractModel
     }
 
     /**
+     * Method to get user by ID
+     *
+     * @param  int $id
+     * @return array
+     */
+    public function getById($id)
+    {
+        return Table\Users::findById($id)->toArray();
+    }
+
+    /**
+     * Method to save new user
+     *
+     * @param  array $data
+     * @return array
+     */
+    public function save(array $data)
+    {
+        $user = new Table\Users([
+            'username'   => (isset($data['username'])) ? $data['username'] : null,
+            'first_name' => (isset($data['first_name'])) ? $data['first_name'] : null,
+            'last_name'  => (isset($data['last_name'])) ? $data['last_name'] : null,
+            'email'      => (isset($data['email'])) ? $data['email'] : null
+        ]);
+        $user->save();
+
+        return $user->toArray();
+    }
+
+    /**
+     * Method to update user
+     *
+     * @param  int   $id
+     * @param  array $data
+     * @return array
+     */
+    public function update($id, array $data)
+    {
+        $user = Table\Users::findById($id);
+
+        if (isset($user->id)) {
+            $user->username   = (isset($data['username'])) ? $data['username'] : $user->username;
+            $user->first_name = (isset($data['first_name'])) ? $data['first_name'] : $user->first_name;
+            $user->last_name  = (isset($data['last_name'])) ? $data['last_name'] : $user->last_name;
+            $user->email      = (isset($data['email'])) ? $data['email'] : $user->email;
+            $user->save();
+        }
+
+        return $user->toArray();
+    }
+
+    /**
      * Method to get user count
      *
      * @param  mixed  $filter
