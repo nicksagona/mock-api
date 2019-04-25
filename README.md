@@ -86,8 +86,7 @@ parameter can accept multiple conditional strings:
 
 ```
 curl -i -X GET \
-    "http://localhost:8000/users?fields[]=id&fields[]=username\
-&filter[]=username+LIKE+jo%"
+    "http://localhost:8000/users?fields[]=id&fields[]=username&filter[]=username+LIKE+jo%"
 ```
 
 ##### POST
