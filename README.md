@@ -95,8 +95,7 @@ You can create a new user by using the `POST` method with the
 following URL:
 
 ```
-curl -i -X POST -d"username=testuser&first_name=Test" \
-    "http://localhost:8000/users"
+curl -i -X POST -d"username=testuser&first_name=Test" http://localhost:8000/users
 ```
 
 ##### PUT
@@ -105,8 +104,7 @@ You can update an existing user by using the `PUT` method with
 the following URL:
 
 ```
-curl -i -X PUT -d"username=testuser2&first_name=Test2" \
-    "http://localhost:8000/users/501"
+curl -i -X PUT -d"username=testuser2&first_name=Test2" http://localhost:8000/users/501
 ```
 
 ##### DELETE
@@ -115,13 +113,12 @@ You can delete an existing user by using the `DELETE` method
 with the following URL:
 
 ```
-curl -i -X DELETE "http://localhost:8000/users/501"
+curl -i -X DELETE http://localhost:8000/users/501
 ```
 
 Alternatively, you can delete multiple users at a time with
 the `DELETE` method and passing an array of user ids:
 
 ```
-curl -i -X DELETE -d"rm_users[]=501&rm_users[]=502" \
-    "http://localhost:8000/users"
+curl -i -X DELETE -d"rm_users[]=501&rm_users[]=502" http://localhost:8000/users
 ```
