@@ -118,6 +118,40 @@ class User extends AbstractModel
     }
 
     /**
+     * Delete user
+     *
+     * @param  int   $id
+     * @return int
+     */
+    public function delete($id)
+    {
+        $user = Table\Users::findById($id);
+        if (isset($user->id)) {
+            $user->delete();
+            return 204;
+        } else {
+            return 404;
+        }
+    }
+
+    /**
+     * Remove users
+     *
+     * @param  array $data
+     * @return int
+     */
+    public function remove(array $data)
+    {
+        foreach ($data as $id) {
+            $user = Table\Users::findById($id);
+            if (isset($user->id)) {
+                $user->delete();
+            }
+        }
+        return 204;
+    }
+
+    /**
      * Method to get user count
      *
      * @param  mixed  $filter

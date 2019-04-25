@@ -16,7 +16,12 @@ class IndexController extends AbstractController
     public function index($id = null)
     {
         if (null !== $id) {
-
+            $user = (new Model\User())->getById($id);
+            if (!isset($user['id'])) {
+                $this->send(404);
+            } else {
+                $this->send(200, $user);
+            }
         } else {
             $userModel = new Model\User();
             $fields    = (null !== $this->request->getQuery('fields')) ? $this->request->getQuery('fields') : [];
@@ -30,7 +35,7 @@ class IndexController extends AbstractController
                 'result_count' => $userModel->getCount($filter)
             ];
 
-            $this->send($results);
+            $this->send(200, $results);
         }
     }
 
@@ -41,7 +46,12 @@ class IndexController extends AbstractController
      */
     public function create()
     {
-        $this->send(['method' => 'user create']);
+        $user = (new Model\User())->save($this->request->getParsedData());
+        if (!isset($user['id'])) {
+            $this->send(400);
+        } else {
+            $this->send(200, $user);
+        }
     }
 
     /**
@@ -52,7 +62,12 @@ class IndexController extends AbstractController
      */
     public function update($id)
     {
-        $this->send(['method' => 'user update (' . $id . ')']);
+        $user = (new Model\User())->update($id, $this->request->getParsedData());
+        if (!isset($user['id'])) {
+            $this->send(404);
+        } else {
+            $this->send(200, $user);
+        }
     }
 
     /**
@@ -63,7 +78,17 @@ class IndexController extends AbstractController
      */
     public function delete($id = null)
     {
-        $this->send(['method' => 'user delete (' . $id . ')']);
+        $user = new Model\User();
+        $data = $this->request->getParsedData();
+        $code = 400;
+
+        if (null !== $id) {
+            $code = $user->delete($id);
+        } else if (!empty($data['rm_users'])) {
+            $code = $user->remove($data['rm_users']);
+        }
+
+        $this->send($code);
     }
 
     /**
@@ -75,7 +100,7 @@ class IndexController extends AbstractController
     {
         $userModel = new Model\User();
         $filter    = (null !== $this->request->getQuery('filter')) ? $this->request->getQuery('filter') : null;
-        $this->send(['result_count' => $userModel->getCount($filter)]);
+        $this->send(200, ['result_count' => $userModel->getCount($filter)]);
     }
 
     /**
@@ -85,7 +110,7 @@ class IndexController extends AbstractController
      */
     public function error()
     {
-        $this->send(['error' => 'Resource not found.'], 404);
+        $this->send(404, ['error' => 'Resource not found.']);
     }
 
 }

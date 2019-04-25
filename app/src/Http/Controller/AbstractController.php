@@ -74,13 +74,13 @@ abstract class AbstractController extends \Pop\Controller\AbstractController
     /**
      * Send method
      *
-     * @param  string $body
      * @param  int    $code
+     * @param  string $body
      * @param  string $message
      * @param  array  $headers
      * @return void
      */
-    public function send($body = null, $code = 200, $message = null, array $headers = null)
+    public function send($code = 200, $body = null, $message = null, array $headers = null)
     {
         if (null !== $message) {
             $this->response->setMessage($message);
