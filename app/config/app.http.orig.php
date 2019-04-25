@@ -3,7 +3,7 @@
 return [
     'database' => include __DIR__ . '/database.php',
     'auth'     => false,
-    'auth_key' => '',
+    'auth_key' => null,
     'routes'   => [
         'options,get' => [
             '/users[/:id]' => [
