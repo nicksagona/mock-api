@@ -41,6 +41,9 @@ class Module extends \Pop\Module\Module
             );
         }
 
+        if ($this->application->config['auth']) {
+            $this->application->on('app.dispatch.pre', 'Mock\Api\Http\Event\Auth::authenticate', 1);
+        }
         $this->application->on('app.dispatch.pre', 'Mock\Api\Http\Event\Options::check', 2);
 
         return $this;
