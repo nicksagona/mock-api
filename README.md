@@ -71,8 +71,7 @@ with query parameters. The following query parameters are supported:
  - `fields`
 
 ```
-curl -i -X GET \
-    "http://localhost:8000/users?page=2&limit=20&sort=-last_name"
+curl -i -X GET http://localhost:8000/users?page=2&limit=20&sort=-last_name
 ```
 
 The `sort` parameter accepts the field name by which to sort the
