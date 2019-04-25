@@ -19,7 +19,7 @@ cp app/config/app.http.orig.php app/config/app.http.php
 
 Config your database by running:
 
-*(Please note that the mock data is for MySQL-only)*
+*(Please note that the mock data is currently for MySQL-only)*
 
 ```
 ./kettle db:config
