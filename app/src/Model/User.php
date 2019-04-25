@@ -36,16 +36,23 @@ class User extends AbstractModel
             $limit = null;
         }
 
+        $orderBy = null;
+
         if (null !== $sort) {
-            if (substr($sort, 0, 1) == '-') {
-                $sort  = substr($sort, 1);
-                $order = 'DESC';
+            if (strpos($sort, ',') !== false) {
+                $sortAry = explode(',', $sort);
             } else {
-                $order = 'ASC';
+                $sortAry = [$sort];
             }
-            $orderBy = $sort . ' ' . $order;
-        } else {
-            $orderBy = null;
+            foreach ($sortAry as $sort) {
+                if (substr($sort, 0, 1) == '-') {
+                    $sort  = substr($sort, 1);
+                    $order = 'DESC';
+                } else {
+                    $order = 'ASC';
+                }
+                $orderBy .= ((null !== $orderBy) ? ', ' : '') . $sort . ' ' . $order;
+            }
         }
 
         if (!empty($filter)) {

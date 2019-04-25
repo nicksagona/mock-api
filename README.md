@@ -3,7 +3,7 @@
 This repository provides a quick and easy API with mock user data
 to write and test other API-driven applications against.
 
-### Installation
+### Installation & Setup
 
 Fetch the repository and run:
 
@@ -17,7 +17,7 @@ Copy the original application config to the required live one:
 cp app/config/app.http.orig.php app/config/app.http.php
 ``` 
 
-Config your database by running:
+Configure your database by running:
 
 *(Please note that the mock data is currently for MySQL-only)*
 
@@ -25,7 +25,7 @@ Config your database by running:
 ./kettle db:config
 ```
 
-Then to install the mock data in your database, run:
+Install the mock data in your database by running:
 
 ```
 ./kettle db:seed
@@ -55,7 +55,7 @@ an authorization header like this:
 curl -i -X GET --header "Authorization: Bearer my-auth-key" http://localhost:8000/users
 ```
 
-A bad or missing auth header will result in a 401 error response.
+A bad or missing authorization header will result in a 401 error response.
 
 ### Examples
 
@@ -77,7 +77,8 @@ curl -i -X GET \
 
 The `sort` parameter accepts the field name by which to sort the
 result set, which will default to ascending order, unless the field
-name is preceded with a `-` like the example above.
+name is preceded with a `-` like the example above, which will set
+the sort order to descending order.
 
 The `fields` parameter can accept multiple field names to return
 to select only the columns you which to select. The `filter`
