@@ -80,7 +80,7 @@ name is preceded with a `-` like the example above, which will set
 the sort order to descending order.
 
 The `fields` parameter can accept multiple field names to return
-to select only the columns you which to select. The `filter`
+to select only the columns you wish to select. The `filter`
 parameter can accept multiple conditional strings:
 
 ```
