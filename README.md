@@ -54,3 +54,5 @@ an authorization header like this:
 ```
 curl -i -X GET --header "Authorization: Bearer my-auth-key" http://localhost:8000/users
 ```
+
+A bad or missing auth header will result in a 401 error response.
