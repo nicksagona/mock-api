@@ -9,5 +9,10 @@
         "psr-4": {
             "Mock\\Api\\": "app/src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.x-dev"
+        }
     }
 }
