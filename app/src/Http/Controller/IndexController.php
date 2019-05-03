@@ -31,8 +31,8 @@ class IndexController extends AbstractController
             $limit     = (null !== $this->request->getQuery('limit')) ? (int)$this->request->getQuery('limit') : null;
 
             $results = [
-                'results'      => $userModel->getAll($page, $limit, $sort, $filter, $fields),
-                'result_count' => $userModel->getCount($filter)
+                'results'       => $userModel->getAll($page, $limit, $sort, $filter, $fields),
+                'results_count' => $userModel->getCount($filter)
             ];
 
             $this->send(200, $results);
@@ -100,7 +100,7 @@ class IndexController extends AbstractController
     {
         $userModel = new Model\User();
         $filter    = (null !== $this->request->getQuery('filter')) ? $this->request->getQuery('filter') : null;
-        $this->send(200, ['result_count' => $userModel->getCount($filter)]);
+        $this->send(200, ['results_count' => $userModel->getCount($filter)]);
     }
 
     /**
