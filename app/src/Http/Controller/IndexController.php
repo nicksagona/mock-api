@@ -104,6 +104,17 @@ class IndexController extends AbstractController
     }
 
     /**
+     * Fields action
+     *
+     * @return void
+     */
+    public function fields()
+    {
+        $userModel = new Model\User();
+        $this->send(200, ['fields' => $userModel->getSearchFields()]);
+    }
+
+    /**
      * Error action
      *
      * @return void

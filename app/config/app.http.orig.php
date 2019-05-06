@@ -13,6 +13,10 @@ return [
             '/users/count[/]' => [
                 'controller' => 'Mock\Api\Http\Controller\IndexController',
                 'action'     => 'count'
+            ],
+            '/users/fields[/]' => [
+                'controller' => 'Mock\Api\Http\Controller\IndexController',
+                'action'     => 'fields'
             ]
         ],
         'options,post' => [
