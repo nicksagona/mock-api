@@ -22,10 +22,10 @@ class User extends AbstractModel
      * @param  int    $limit
      * @param  string $sort
      * @param  mixed  $filter
-     * @param  array  $fields
+     * @param  mixed  $fields
      * @return array
      */
-    public function getAll($page = null, $limit = null, $sort = null, $filter = null, array $fields = [])
+    public function getAll($page = null, $limit = null, $sort = null, $filter = null, $fields = null)
     {
         if ((null !== $limit) && (null !== $page)) {
             $page = ((int)$page > 1) ? ($page * $limit) - $limit : null;
@@ -176,11 +176,15 @@ class User extends AbstractModel
     /**
      * Method to get search fields
      *
-     * @param  array $fields
+     * @param  mixed $fields
      * @return array
      */
-    public function getSearchFields(array $fields = [])
+    public function getSearchFields($fields = null)
     {
+        if (!empty($fields) && !is_array($fields)) {
+            $fields = (strpos($fields, ',') !== false) ? explode(',', $fields) : [$fields];
+        }
+
         return (!empty($fields)) ?
             array_diff($this->searchFields, array_diff($this->searchFields, $fields)) : $this->searchFields;
     }

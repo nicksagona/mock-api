@@ -24,15 +24,23 @@ class IndexController extends AbstractController
             }
         } else {
             $userModel = new Model\User();
-            $fields    = (null !== $this->request->getQuery('fields')) ? $this->request->getQuery('fields') : [];
             $page      = (null !== $this->request->getQuery('page')) ? (int)$this->request->getQuery('page') : null;
             $sort      = (null !== $this->request->getQuery('sort')) ? $this->request->getQuery('sort') : null;
-            $filter    = (null !== $this->request->getQuery('filter')) ? $this->request->getQuery('filter') : null;
             $limit     = (null !== $this->request->getQuery('limit')) ? (int)$this->request->getQuery('limit') : null;
+            $filter    = (null !== $this->request->getQuery('filter')) ? $this->request->getQuery('filter') : null;
+            $fields    = (null !== $this->request->getQuery('fields')) ? $this->request->getQuery('fields') : null;
+
+            $results = $userModel->getAll($page, $limit, $sort, $filter, $fields);
 
             $results = [
-                'results'       => $userModel->getAll($page, $limit, $sort, $filter, $fields),
-                'results_count' => $userModel->getCount($filter)
+                'page'         => $page,
+                'sort'         => $sort,
+                'limit'        => $limit,
+                'filter'       => $filter,
+                'fields'       => $fields,
+                'total_count'  => $userModel->getCount($filter),
+                'result_count' => count($results),
+                'results'      => $results,
             ];
 
             $this->send(200, $results);
