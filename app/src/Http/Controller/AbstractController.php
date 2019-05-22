@@ -110,7 +110,7 @@ abstract class AbstractController extends \Pop\Controller\AbstractController
      */
     public function sendOptions($code = 200, $message = null, array $headers = null)
     {
-        $this->send('', $code, $message, $headers);
+        $this->send($code, '', $message, $headers);
     }
 
 }
